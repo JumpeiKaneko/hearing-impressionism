@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聴く絵画 - Hearing Impressionism</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            margin: 0;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+            font-size: 1.5em;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 0.8em;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+        }
+        .statement {
+            font-size: 0.85em;
+            line-height: 1.8;
+            color: #bbb;
+            margin-bottom: 60px;
+            text-align: justify;
+        }
+        .works-list {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            border-top: 1px solid #333;
+        }
+        .work-item {
+            border-bottom: 1px solid #333;
+            padding: 25px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .work-title {
+            font-size: 1.1em;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        .work-link {
+            color: #000;
+            background-color: #fff;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        .work-link:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>聴く絵画</h1>
+        <div class="subtitle">Hearing Impressionism</div>
+        
+        <div class="statement">
+            <p>本プラットフォームは、絵画が描かれた「場所」の記憶を、視覚を削ぎ落とした「音響空間」として再現する試みです。</p>
+            <p>作品を選択し、暗闇の画面を一度タップして音世界へ入ってください。そこで流れる時間は、現実の世界標準時と同期しています。いつ、誰がアクセスしても、同じ瞬間の「一回性の現象」を共有します。</p>
+        </div>
+
+        <ul class="works-list">
+            <li class="work-item">
+                <span class="work-title">ジベルニーの庭</span>
+                <a href="./WebGL_Build/index.html" class="work-link">Enter Space</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
