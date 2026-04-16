@@ -98,6 +98,12 @@ a { cursor: none; }
 .concept p { margin-bottom: 1.5rem; }
 .concept p:last-child { margin-bottom: 0; }
 
+/* スマホ用の文字調整 */
+@media (max-width: 600px) {
+    .concept { font-size: 0.85rem; }
+    .concept br { display: none; } /* スマホでは自動で折り返させる */
+}
+
 /* ==========================================
    6. Exhibition Grid (Square Albums)
 ========================================== */
@@ -125,10 +131,21 @@ a { cursor: none; }
     letter-spacing: 0.1em; display: block; transition: transform 0.4s ease;
     text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
+
+/* PC（マウスあり）のホバーエフェクト */
 @media (hover: hover) {
     .work-square:hover { border-color: #ffffff; }
     .work-square:hover .work-drawing { opacity: 1; transform: scale(1); }
     .work-square:hover .work-title { transform: translateY(-5px); }
+}
+
+/* スマホ（指タッチ操作）用のデザイン：最初から絵を見せる */
+@media (hover: none) {
+    .work-square { border-color: rgba(255, 255, 255, 0.5); }
+    .work-drawing {
+        opacity: 0.6; /* 少し暗くして文字を読みやすくする */
+        transform: scale(1);
+    }
 }
 
 /* ==========================================
