@@ -2,17 +2,13 @@
    1. Typography & Base
 ========================================== */
 :root {
-    --bg-color: #050505; /* より深い黒 */
-    --text-main: #ffffff; /* パキッとした白で視認性MAX */
+    --bg-color: #050505;
+    --text-main: #ffffff;
     --text-muted: #888888;
     --font-sans: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     background-color: var(--bg-color);
@@ -26,12 +22,11 @@ body {
     align-items: center;
     padding: 3rem 2rem;
     position: relative;
-    /* PCではデフォルトのカーソルを消して独自カーソルを使う */
     cursor: none; 
 }
 
 /* ==========================================
-   2. Custom Cursor (「おお！」となる演出)
+   2. Custom Cursor
 ========================================== */
 @media (pointer: fine) {
     .cursor, .cursor-follower {
@@ -43,36 +38,26 @@ body {
         z-index: 9999;
     }
     
-    /* 中心の小さな点 */
     .cursor {
-        width: 6px;
-        height: 6px;
+        width: 6px; height: 6px;
         background-color: #ffffff;
         transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
     }
 
-    /* 遅れてついてくる輪っか */
     .cursor-follower {
-        width: 30px;
-        height: 30px;
+        width: 30px; height: 30px;
         border: 1px solid rgba(255, 255, 255, 0.5);
         transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
     }
 
-    /* リンクに乗ったときのアニメーション */
-    .cursor.is-active {
-        opacity: 0; /* 中心点は消える */
-    }
+    .cursor.is-active { opacity: 0; }
     .cursor-follower.is-active {
-        width: 60px;
-        height: 60px;
+        width: 60px; height: 60px;
         background-color: #ffffff;
-        mix-blend-mode: difference; /* 背景や文字の色を反転させるプロの技 */
+        mix-blend-mode: difference;
         border: none;
     }
 }
-
-/* リンク要素は独自カーソルを使うために none に */
 a { cursor: none; }
 
 /* ==========================================
@@ -86,12 +71,8 @@ a { cursor: none; }
     z-index: -1;
 }
 
-.wrapper {
-    max-width: 680px;
-    width: 100%;
-}
+.wrapper { max-width: 760px; width: 100%; }
 
-/* スッと下から浮かび上がるアニメーション */
 .reveal-target {
     opacity: 0;
     transform: translateY(20px);
@@ -102,109 +83,98 @@ a { cursor: none; }
 .exhibition-nav.reveal-target { animation-delay: 0.6s; }
 
 @keyframes revealUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================================
-   4. Header & Typography
+   4. Header
 ========================================== */
-.header {
-    margin-bottom: 4rem;
-}
-
+.header { margin-bottom: 4rem; }
 .subtitle {
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
+    font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 0.15em; color: var(--text-muted);
+    margin-bottom: 0.5rem; text-transform: uppercase;
 }
-
 .title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-size: 2.2rem; font-weight: 700; letter-spacing: 0.1em;
 }
 
 /* ==========================================
    5. Concept Statement
 ========================================== */
 .concept {
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 2;
-    letter-spacing: 0.05em;
-    color: #cccccc;
-    margin-bottom: 5rem;
+    font-size: 1rem; font-weight: 400; line-height: 2;
+    letter-spacing: 0.05em; color: #cccccc; margin-bottom: 5rem;
 }
-
-.concept p {
-    margin-bottom: 1.5rem;
-}
-
-.concept p:last-child {
-    margin-bottom: 0;
-}
+.concept p { margin-bottom: 1.5rem; }
+.concept p:last-child { margin-bottom: 0; }
 
 /* ==========================================
-   6. Exhibition Links
+   6. Exhibition Grid (Square Albums)
 ========================================== */
-.exhibition-nav {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-top: 2rem;
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
 }
 
-.works { list-style: none; }
+@media (max-width: 600px) {
+    .works-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
 
-.work-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 0;
-    color: var(--text-main);
-    text-decoration: none;
+.work-square {
     position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color 0.4s ease;
+}
+
+.work-drawing {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s ease;
+    filter: grayscale(100%) contrast(1.2);
+}
+
+.work-info {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 2;
+    text-align: right;
 }
 
 .work-title {
+    font-family: var(--font-sans);
+    color: #ffffff;
     font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 0.1em;
-}
-
-.work-action {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.action-text {
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-}
-
-.action-line {
     display: block;
-    width: 20px;
-    height: 2px; /* 少し太くして視認性アップ */
-    background-color: var(--text-muted);
-    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform 0.4s ease;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
-/* ホバー時の線の動き */
 @media (hover: hover) {
-    .work-link:hover .action-line {
-        width: 50px;
-        background-color: #ffffff;
+    .work-square:hover { border-color: #ffffff; }
+    .work-square:hover .work-drawing {
+        opacity: 1; transform: scale(1);
     }
-    .work-link:hover .action-text {
-        color: #ffffff;
+    .work-square:hover .work-title {
+        transform: translateY(-5px);
     }
 }
