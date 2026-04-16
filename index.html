@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聴く絵画 - Hearing Impressionism</title>
+    <title>音間 OTOMA - 音世界のためのプラットフォーム</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,13 +14,12 @@
 <body>
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
-
     <div class="noise-overlay"></div>
 
     <main class="wrapper">
         <header class="header reveal-target">
-            <p class="subtitle">Hearing Impressionism</p>
-            <h1 class="title">聴く絵画</h1>
+            <p class="subtitle">A Platform for Soundscapes</p>
+            <h1 class="title">音間 OTOMA</h1>
         </header>
         
         <section class="concept reveal-target">
@@ -30,17 +29,23 @@
         </section>
 
         <nav aria-label="展示作品一覧" class="exhibition-nav reveal-target">
-            <ul class="works">
-                <li class="work-item">
-                    <a href="./WebGL_Build/index.html" class="work-link hover-target">
-                        <span class="work-title">ジベルニーの庭</span>
-                        <div class="work-action">
-                            <span class="action-text">Enter the space</span>
-                            <span class="action-line"></span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+            <div class="works-grid">
+                
+                <a href="./WebGL_Build/index.html" class="work-square hover-target">
+                    <div class="work-drawing" style="background-image: url('impressionism.jpg');"></div>
+                    <div class="work-info">
+                        <span class="work-title">印象派絵画の音を聴く</span>
+                    </div>
+                </a>
+
+                <a href="#" class="work-square hover-target">
+                    <div class="work-drawing" style="background-image: url('reminiscence.jpg');"></div>
+                    <div class="work-info">
+                        <span class="work-title">追憶</span>
+                    </div>
+                </a>
+
+            </div>
         </nav>
     </main>
 
@@ -53,13 +58,11 @@
         if (window.matchMedia("(pointer: fine)").matches) {
             document.addEventListener('mousemove', (e) => {
                 cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-                // フォロワーは少し遅れてついてくる（ヌルッとした動き）
                 setTimeout(() => {
                     follower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
                 }, 80);
             });
 
-            // リンクにマウスが乗ったときの「おお！」となる反転エフェクト
             hoverTargets.forEach(target => {
                 target.addEventListener('mouseenter', () => {
                     cursor.classList.add('is-active');
