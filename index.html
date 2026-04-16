@@ -4,26 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聴く絵画 - Hearing Impressionism</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="wrapper">
+    <div class="noise-overlay"></div> <main class="wrapper">
         <header class="header">
-            <h1 class="title">聴く絵画</h1>
             <p class="subtitle">Hearing Impressionism</p>
+            <h1 class="title">聴く絵画</h1>
         </header>
         
         <section class="concept">
-            <p>本プラットフォームは、絵画が描かれた「場所」の記憶を、視覚を削ぎ落とした「音響空間」として再現する試みです。</p>
-            <p>作品を選択し、暗闇の画面を一度タップして音世界へ入ってください。そこで流れる時間は、現実の世界標準時と同期しています。いつ、誰がアクセスしても、同じ瞬間の「一回性の現象」を共有します。</p>
+            <p>「耳で視る」絵画のインターフェースを作るプロジェクト。</p>
+            <p>視覚や言葉による説明に頼らず、誰もが作品の空間に入り込み「実感」できる環境を構築する。</p>
+            <p>鑑賞者が音の世界に触れることで、絵画の「つづき」の物語が生まれる新たな鑑賞体験を提案する。</p>
         </section>
 
-        <nav aria-label="展示作品一覧">
+        <nav aria-label="展示作品一覧" class="exhibition-nav">
             <ul class="works">
                 <li class="work-item">
-                    <a href="./WebGL_Build/index.html" class="work-link" aria-label="ジベルニーの庭の音世界へ入る">
+                    <a href="./WebGL_Build/index.html" class="work-link">
                         <span class="work-title">ジベルニーの庭</span>
-                        <span class="work-action">Enter Space <span class="arrow" aria-hidden="true">&rarr;</span></span>
+                        <div class="work-action">
+                            <span class="action-text">Enter the space</span>
+                            <span class="action-line"></span>
+                        </div>
                     </a>
                 </li>
             </ul>
