@@ -1,12 +1,12 @@
 /* ==========================================
-   1. Base & Reset
+   1. Typography & Base
 ========================================== */
 :root {
-    --bg-color: #050505;
-    --text-main: #eaeaea;
-    --text-muted: #888888;
-    --accent: #ffffff;
-    --font-stack: "Helvetica Neue", "Inter", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    --bg-color: #0a0a0a;
+    --text-main: #e0e0e0;
+    --text-muted: #777777;
+    --font-en: 'Cormorant Garamond', serif;
+    --font-ja: 'Shippori Mincho', serif;
 }
 
 * {
@@ -18,138 +18,166 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
-    font-family: var(--font-stack);
+    font-family: var(--font-ja);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-    opacity: 0;
-    animation: fadeIn 2s ease-out forwards;
+    padding: 3rem 2rem;
+    position: relative;
 }
 
-@keyframes fadeIn {
-    to { opacity: 1; }
+/* 画面全体にうっすらとノイズをかけてアート作品感を出す */
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 50;
 }
 
-/* ==========================================
-   2. Layout
-========================================== */
+/* 初期のふわりとしたフェードイン */
 .wrapper {
-    max-width: 640px;
+    max-width: 680px;
     width: 100%;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: smoothFade 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.2s;
+    z-index: 10;
+}
+
+@keyframes smoothFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ==========================================
-   3. Typography & Header
+   2. Header
 ========================================== */
 .header {
-    margin-bottom: 4rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 2rem;
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.subtitle {
+    font-family: var(--font-en);
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
 }
 
 .title {
     font-size: 1.8rem;
-    font-weight: 300;
-    letter-spacing: 0.4em;
-    margin-bottom: 0.5rem;
-}
-
-.subtitle {
-    font-size: 0.85rem;
     font-weight: 400;
-    letter-spacing: 0.2em;
-    color: var(--text-muted);
-    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    margin-left: 0.4em; /* 文字間隔の分だけ中央ズレを補正 */
 }
 
 /* ==========================================
-   4. Statement (Concept)
+   3. Concept Statement
 ========================================== */
 .concept {
     font-size: 0.95rem;
-    line-height: 2;
-    letter-spacing: 0.05em;
-    color: #b0b0b0;
-    margin-bottom: 4rem;
+    line-height: 2.4;
+    letter-spacing: 0.08em;
+    color: #a0a0a0;
+    margin-bottom: 6rem;
+    text-align: center;
 }
 
 .concept p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .concept p:last-child {
     margin-bottom: 0;
 }
 
-/* ==========================================
-   5. Interactive Exhibition Links
-========================================== */
-.works {
-    list-style: none;
+@media (max-width: 600px) {
+    .concept { text-align: left; }
+    .concept br { display: none; } /* スマホでは自然な改行に任せる */
 }
 
-.work-item {
-    margin-bottom: 1rem;
+/* ==========================================
+   4. Exhibition Links (UI)
+========================================== */
+.exhibition-nav {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+.works {
+    list-style: none;
 }
 
 .work-link {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
-    background-color: transparent;
+    padding: 1.5rem 0;
     color: var(--text-main);
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
-    overflow: hidden;
-}
-
-@media (hover: hover) {
-    .work-link:hover {
-        background-color: var(--accent);
-        color: var(--bg-color);
-        border-color: var(--accent);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    }
-    .work-link:hover .arrow {
-        transform: translateX(5px);
-    }
-}
-
-.work-link:active {
-    transform: scale(0.98);
-    transition: all 0.1s;
-}
-
-.work-link:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
+    cursor: pointer;
 }
 
 .work-title {
-    font-size: 1.1rem;
-    font-weight: 300;
-    letter-spacing: 0.1em;
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    transition: color 0.4s ease;
 }
 
+/* 「Enter the space」のアクション部分 */
 .work-action {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
-.arrow {
-    transition: transform 0.3s ease;
+.action-text {
+    font-family: var(--font-en);
+    font-size: 1rem;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    transition: color 0.4s ease;
+}
+
+/* ダサい矢印やボタンを辞め、スッと伸びる「線」で誘導する */
+.action-line {
+    display: block;
+    width: 30px;
+    height: 1px;
+    background-color: var(--text-muted);
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Hover Effects */
+@media (hover: hover) {
+    .work-link:hover .work-title {
+        color: #ffffff;
+    }
+    .work-link:hover .action-text {
+        color: #ffffff;
+    }
+    .work-link:hover .action-line {
+        width: 60px; /* 線がスッと伸びる */
+        background-color: #ffffff;
+    }
+}
+
+.work-link:focus-visible {
+    outline: none;
+}
+.work-link:focus-visible .action-line {
+    width: 60px;
+    background-color: #ffffff;
 }
