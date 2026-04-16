@@ -1,0 +1,155 @@
+/* ==========================================
+   1. Base & Reset
+========================================== */
+:root {
+    --bg-color: #050505;
+    --text-main: #eaeaea;
+    --text-muted: #888888;
+    --accent: #ffffff;
+    --font-stack: "Helvetica Neue", "Inter", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-stack);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    opacity: 0;
+    animation: fadeIn 2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* ==========================================
+   2. Layout
+========================================== */
+.wrapper {
+    max-width: 640px;
+    width: 100%;
+}
+
+/* ==========================================
+   3. Typography & Header
+========================================== */
+.header {
+    margin-bottom: 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* ==========================================
+   4. Statement (Concept)
+========================================== */
+.concept {
+    font-size: 0.95rem;
+    line-height: 2;
+    letter-spacing: 0.05em;
+    color: #b0b0b0;
+    margin-bottom: 4rem;
+}
+
+.concept p {
+    margin-bottom: 1.5rem;
+}
+
+.concept p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================
+   5. Interactive Exhibition Links
+========================================== */
+.works {
+    list-style: none;
+}
+
+.work-item {
+    margin-bottom: 1rem;
+}
+
+.work-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: transparent;
+    color: var(--text-main);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (hover: hover) {
+    .work-link:hover {
+        background-color: var(--accent);
+        color: var(--bg-color);
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+    .work-link:hover .arrow {
+        transform: translateX(5px);
+    }
+}
+
+.work-link:active {
+    transform: scale(0.98);
+    transition: all 0.1s;
+}
+
+.work-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.work-title {
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
+.work-action {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
