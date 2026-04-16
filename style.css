@@ -29,7 +29,6 @@ body {
     position: relative;
 }
 
-/* 画面全体にうっすらとノイズをかけてアート作品感を出す */
 .noise-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -38,7 +37,6 @@ body {
     z-index: 50;
 }
 
-/* 初期のふわりとしたフェードイン */
 .wrapper {
     max-width: 680px;
     width: 100%;
@@ -60,7 +58,7 @@ body {
    2. Header
 ========================================== */
 .header {
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
     text-align: center;
 }
 
@@ -77,36 +75,43 @@ body {
     font-size: 1.8rem;
     font-weight: 400;
     letter-spacing: 0.4em;
-    margin-left: 0.4em; /* 文字間隔の分だけ中央ズレを補正 */
+    margin-left: 0.4em;
 }
 
 /* ==========================================
-   3. Concept Statement
+   3. Concept Statement (読みやすく調整)
 ========================================== */
 .concept {
     font-size: 0.95rem;
-    line-height: 2.4;
+    line-height: 2.2;
     letter-spacing: 0.08em;
-    color: #a0a0a0;
-    margin-bottom: 6rem;
-    text-align: center;
+    color: #b0b0b0;
+    max-width: 480px;      /* 横幅を絞って視線を安定させる */
+    margin: 0 auto 5rem;   /* 中央に配置 */
+    text-align: left;      /* テキスト自体は左揃えでスッキリと */
 }
 
 .concept p {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .concept p:last-child {
     margin-bottom: 0;
 }
 
+/* スマホ表示時の調整 */
 @media (max-width: 600px) {
-    .concept { text-align: left; }
-    .concept br { display: none; } /* スマホでは自然な改行に任せる */
+    .concept {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+    .concept br {
+        display: none; /* スマホでは自然な改行に任せる */
+    }
 }
 
 /* ==========================================
-   4. Exhibition Links (UI)
+   4. Exhibition Links
 ========================================== */
 .exhibition-nav {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -135,7 +140,6 @@ body {
     transition: color 0.4s ease;
 }
 
-/* 「Enter the space」のアクション部分 */
 .work-action {
     display: flex;
     align-items: center;
@@ -151,7 +155,6 @@ body {
     transition: color 0.4s ease;
 }
 
-/* ダサい矢印やボタンを辞め、スッと伸びる「線」で誘導する */
 .action-line {
     display: block;
     width: 30px;
@@ -160,7 +163,6 @@ body {
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Hover Effects */
 @media (hover: hover) {
     .work-link:hover .work-title {
         color: #ffffff;
@@ -169,7 +171,7 @@ body {
         color: #ffffff;
     }
     .work-link:hover .action-line {
-        width: 60px; /* 線がスッと伸びる */
+        width: 60px;
         background-color: #ffffff;
     }
 }
