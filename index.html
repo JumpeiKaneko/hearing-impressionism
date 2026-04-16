@@ -19,26 +19,26 @@
     <main class="wrapper">
         <header class="header reveal-target">
             <p class="subtitle">A Platform for Soundscapes</p>
-            <h1 class="title">音間 OTOMA</h1>
+            <h1 class="title">音間<span class="title-sub">OTOMA</span></h1>
         </header>
         
         <section class="concept reveal-target">
-            <p>「耳で視る」絵画のインターフェースを作るプロジェクト。</p>
-            <p>視覚や言葉による説明に頼らず、誰もが作品の空間に入り込み「実感」できる環境を構築する。</p>
-            <p>鑑賞者が音の世界に触れることで、絵画の「つづき」の物語が生まれる新たな鑑賞体験を提案する。</p>
+            <p>音を「固定された楽曲」から解放し、自ら身を置くことができる「自立した環境」を構築する。</p>
+            <p>過去の記録をデジタル空間に再配置し、互いに連動させることで、<br>いま・ここでしか起こり得ない「不可逆的な現象」へと更新していく。</p>
+            <p>現実の揺らぎを取り込み、二度と同じ響きを持たずに鳴り続ける「終わりなき環境」。<br>情報の永続性ではなく、現象の一回性を取り戻すためのプラットフォーム。</p>
         </section>
 
         <nav aria-label="展示作品一覧" class="exhibition-nav reveal-target">
             <div class="works-grid">
                 
-                <a href="./WebGL_Build/index.html" class="work-square hover-target">
+                <a href="./album_impressionism.html" class="work-square hover-target">
                     <div class="work-drawing" style="background-image: url('impressionism.jpg');"></div>
                     <div class="work-info">
                         <span class="work-title">印象派絵画の音を聴く</span>
                     </div>
                 </a>
 
-                <a href="#" class="work-square hover-target">
+                <a href="./album_reminiscence.html" class="work-square hover-target">
                     <div class="work-drawing" style="background-image: url('reminiscence.jpg');"></div>
                     <div class="work-info">
                         <span class="work-title">追憶</span>
@@ -54,7 +54,6 @@
         const follower = document.querySelector('.cursor-follower');
         const hoverTargets = document.querySelectorAll('.hover-target');
 
-        // スマホなどのタッチデバイスでは動かさない
         if (window.matchMedia("(pointer: fine)").matches) {
             document.addEventListener('mousemove', (e) => {
                 cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
