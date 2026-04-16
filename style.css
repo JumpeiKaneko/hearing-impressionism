@@ -2,11 +2,10 @@
    1. Typography & Base
 ========================================== */
 :root {
-    --bg-color: #0a0a0a;
-    --text-main: #e0e0e0;
-    --text-muted: #777777;
-    --font-en: 'Cormorant Garamond', serif;
-    --font-ja: 'Shippori Mincho', serif;
+    --bg-color: #050505; /* より深い黒 */
+    --text-main: #ffffff; /* パキッとした白で視認性MAX */
+    --text-muted: #888888;
+    --font-sans: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
 }
 
 * {
@@ -18,7 +17,7 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
-    font-family: var(--font-ja);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
@@ -27,27 +26,82 @@ body {
     align-items: center;
     padding: 3rem 2rem;
     position: relative;
+    /* PCではデフォルトのカーソルを消して独自カーソルを使う */
+    cursor: none; 
 }
 
+/* ==========================================
+   2. Custom Cursor (「おお！」となる演出)
+========================================== */
+@media (pointer: fine) {
+    .cursor, .cursor-follower {
+        position: fixed;
+        top: 0; left: 0;
+        pointer-events: none;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+    }
+    
+    /* 中心の小さな点 */
+    .cursor {
+        width: 6px;
+        height: 6px;
+        background-color: #ffffff;
+        transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+    }
+
+    /* 遅れてついてくる輪っか */
+    .cursor-follower {
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* リンクに乗ったときのアニメーション */
+    .cursor.is-active {
+        opacity: 0; /* 中心点は消える */
+    }
+    .cursor-follower.is-active {
+        width: 60px;
+        height: 60px;
+        background-color: #ffffff;
+        mix-blend-mode: difference; /* 背景や文字の色を反転させるプロの技 */
+        border: none;
+    }
+}
+
+/* リンク要素は独自カーソルを使うために none に */
+a { cursor: none; }
+
+/* ==========================================
+   3. ノイズ＆レイアウト
+========================================== */
 .noise-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
-    z-index: 50;
+    z-index: -1;
 }
 
 .wrapper {
     max-width: 680px;
     width: 100%;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: smoothFade 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    animation-delay: 0.2s;
-    z-index: 10;
 }
 
-@keyframes smoothFade {
+/* スッと下から浮かび上がるアニメーション */
+.reveal-target {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.header.reveal-target { animation-delay: 0.2s; }
+.concept.reveal-target { animation-delay: 0.4s; }
+.exhibition-nav.reveal-target { animation-delay: 0.6s; }
+
+@keyframes revealUp {
     to {
         opacity: 1;
         transform: translateY(0);
@@ -55,40 +109,37 @@ body {
 }
 
 /* ==========================================
-   2. Header
+   4. Header & Typography
 ========================================== */
 .header {
     margin-bottom: 4rem;
-    text-align: center;
 }
 
 .subtitle {
-    font-family: var(--font-en);
-    font-size: 1.1rem;
-    font-style: italic;
+    font-size: 0.9rem;
+    font-weight: 500;
     letter-spacing: 0.15em;
     color: var(--text-muted);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
 }
 
 .title {
-    font-size: 1.8rem;
-    font-weight: 400;
-    letter-spacing: 0.4em;
-    margin-left: 0.4em;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
 }
 
 /* ==========================================
-   3. Concept Statement (読みやすく調整)
+   5. Concept Statement
 ========================================== */
 .concept {
-    font-size: 0.95rem;
-    line-height: 2.2;
-    letter-spacing: 0.08em;
-    color: #b0b0b0;
-    max-width: 480px;      /* 横幅を絞って視線を安定させる */
-    margin: 0 auto 5rem;   /* 中央に配置 */
-    text-align: left;      /* テキスト自体は左揃えでスッキリと */
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2;
+    letter-spacing: 0.05em;
+    color: #cccccc;
+    margin-bottom: 5rem;
 }
 
 .concept p {
@@ -99,28 +150,15 @@ body {
     margin-bottom: 0;
 }
 
-/* スマホ表示時の調整 */
-@media (max-width: 600px) {
-    .concept {
-        font-size: 0.9rem;
-        padding: 0 10px;
-    }
-    .concept br {
-        display: none; /* スマホでは自然な改行に任せる */
-    }
-}
-
 /* ==========================================
-   4. Exhibition Links
+   6. Exhibition Links
 ========================================== */
 .exhibition-nav {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
     padding-top: 2rem;
 }
 
-.works {
-    list-style: none;
-}
+.works { list-style: none; }
 
 .work-link {
     display: flex;
@@ -130,14 +168,12 @@ body {
     color: var(--text-main);
     text-decoration: none;
     position: relative;
-    cursor: pointer;
 }
 
 .work-title {
     font-size: 1.2rem;
-    letter-spacing: 0.2em;
-    font-weight: 400;
-    transition: color 0.4s ease;
+    font-weight: 500;
+    letter-spacing: 0.1em;
 }
 
 .work-action {
@@ -147,39 +183,28 @@ body {
 }
 
 .action-text {
-    font-family: var(--font-en);
-    font-size: 1rem;
-    font-style: italic;
+    font-size: 0.9rem;
+    font-weight: 500;
     letter-spacing: 0.1em;
     color: var(--text-muted);
-    transition: color 0.4s ease;
+    text-transform: uppercase;
 }
 
 .action-line {
     display: block;
-    width: 30px;
-    height: 1px;
+    width: 20px;
+    height: 2px; /* 少し太くして視認性アップ */
     background-color: var(--text-muted);
-    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* ホバー時の線の動き */
 @media (hover: hover) {
-    .work-link:hover .work-title {
-        color: #ffffff;
+    .work-link:hover .action-line {
+        width: 50px;
+        background-color: #ffffff;
     }
     .work-link:hover .action-text {
         color: #ffffff;
     }
-    .work-link:hover .action-line {
-        width: 60px;
-        background-color: #ffffff;
-    }
-}
-
-.work-link:focus-visible {
-    outline: none;
-}
-.work-link:focus-visible .action-line {
-    width: 60px;
-    background-color: #ffffff;
 }
